@@ -9,10 +9,10 @@ df <- read.csv("data/Berlin_with_year.csv")
 
 shinyUI(
   fluidPage(
-    titlePanel("Name Selection"),
+    titlePanel("How are children in Berlin named?"),
     sidebarLayout(
       sidebarPanel(
-        helpText("Display first names of each Kiez."),
+        helpText("Displaying given first names in Berlin by year, gender, and Kiez. source: Berlin open data."),
         
         selectInput("yearId", "Year", choices = unique(df$year)),
         
