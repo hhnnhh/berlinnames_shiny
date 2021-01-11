@@ -1,10 +1,9 @@
 library(shiny)
 library(ggplot2)
 
-#setwd("D:/Dropbox/R_wissen/berlin_names_year/")
 
 #https://stackoverflow.com/questions/46348193/shiny-automatic-selectinput-value-update-based-on-previous-filter
-#df <- read.csv("D:/Dropbox/R_wissen/berlin_names_year/data/berlin_with_year.csv")
+#df <- read.csv("D:/Dropbox/R_wissen/berlin_names_year/berlinnames_shiny/Berlin_2019_with_new_columnname.csv")
 
 
 shinyUI(
@@ -20,19 +19,19 @@ shinyUI(
         selectInput("genderId", "Gender", choices = unique(df$geschlecht)),
         helpText("Based on the gender, now select Kiez below to display the first names in the main panel."),
         
-        selectInput("selectinputid", "Kiez to Select:", choices = unique(df$kiez)),
+        selectInput("selectinputid", "Kiez to Select:", choices = unique(df$Kiez)),
         #checkboxInput("positionid", "Only first names?", value = FALSE, width = NULL),
         actionButton("goButton1", "Submit Choice")),
       
       mainPanel(
         #tableOutput("result")
         plotOutput('plot')
-        #highchartOutput("tree")
+        )
         
       )
     )
   )
-)
+#)
   
 
 #   mainPanel(
