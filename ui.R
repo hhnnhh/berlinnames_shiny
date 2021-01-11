@@ -4,7 +4,7 @@ library(ggplot2)
 
 #https://stackoverflow.com/questions/46348193/shiny-automatic-selectinput-value-update-based-on-previous-filter
 #df <- read.csv("D:/Dropbox/R_wissen/berlin_names_year/berlinnames_shiny/Berlin_2019_with_new_columnname.csv")
-df <- read.csv("data/berlin_with_year_clean.csv")
+df <- read.csv("data/Berlin_with_year.csv")
 
 
 shinyUI(

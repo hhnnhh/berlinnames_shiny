@@ -1,11 +1,15 @@
 library(shiny)
 library(wordcloud)
 library(RColorBrewer)
+getwd()
 
+
+options(shiny.maxRequestSize=30*1024^2) 
 
 server <- function(input, output,session) {
   #df <- read.csv("D:/Dropbox/R_wissen/berlin_names_year/berlinnames_shiny/Berlin_2019_with_new_columnname.csv")
-  #df <- read.csv("D:/Dropbox/R_wissen/berlin_names_year/berlinnames_shiny/data/berlin_with_year_clean.csv")
+  #df_check <- read.csv("data/berlin_with_year_final.csv")
+  df <- read.csv("data/Berlin_with_year.csv")
   
   #observeEvent(input$yearId, {
   #observeEvent(D1(),{
