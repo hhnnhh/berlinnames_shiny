@@ -8,7 +8,7 @@ library(wordcloud)
 #library(here)
 
 #load(here::here('apps', 'df', 'df.RData'))
-df <- read.csv("data/Berlin_with_year_final.csv")
+df <- read.csv("data/Berlin_with_year_position_filtered.csv")
 #df <- read.csv("D:/Dropbox/R_wissen/berlin_name_year/data/Berlin_with_year.csv")
 
 
@@ -50,6 +50,14 @@ ui <- fluidPage(
                    
                    
                  ),
+        helpText("Position data only available since 2017"),
+        conditionalPanel(condition="input.yearId>2016",
+                         selectInput(
+                           inputId = "position", 
+                           label = "Choose position of name:",
+                           choices = c("1","2","3","4","5","6","7"),
+                           selected ="1")
+        ),
                  
                  br(), 
                  
@@ -61,7 +69,7 @@ ui <- fluidPage(
       tabsetPanel(type = "tabs",
       #tableOutput("result")
       tabPanel("Frequent names", plotOutput("plot")),
-      tabPanel("Unique names", tableOutput("result"))
+      tabPanel("Unique names", verbatimTextOutput("result"))
       #  plotOutput('plot'),
        # plotOutput('plot2')
       )

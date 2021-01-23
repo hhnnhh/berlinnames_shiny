@@ -12,7 +12,7 @@ library(wordcloud)
 
 
 server <- function(input, output) {
-  df <- read.csv("data/Berlin_with_year_final.csv")
+  df <- read.csv("data/Berlin_with_year_position_filtered.csv")
   filtered_kiez <- reactive({
     df %>%
         filter(Kiez == input$kiezId)
@@ -25,15 +25,19 @@ server <- function(input, output) {
   
 
   filtered_year <- reactive({
-    filtered_gender() %>% 
-      filter(year == input$yearId) 
+    if (input$yearId>2017){
+      filtered_gender() %>% 
+        filter(year == input$yearId & position == input$position)
+    }
+    else{    filtered_gender() %>% 
+        filter(year == input$yearId)}
   })
   
    one_filtered <- reactive({
      filtered_year() %>% 
        filter(filtered_year()$anzahl == 1)
    })
-  
+   
   fully_filtered <- eventReactive(input$select, {
     filtered_year()
   })
@@ -43,8 +47,13 @@ server <- function(input, output) {
     print(p)
   })
   
-  output$result <-renderTable({
-    one_filtered()
+  output$result <-renderPrint({
+    # if (one_filtered()$vorname>20) {
+    #   (sample(one_filtered()$vorname,20))    
+    #   } else {
+    #     "No names available"
+    #}
+    (sample(one_filtered()$vorname,20)) 
   })
   
   # output$plot2 <- renderPlot({
@@ -53,5 +62,6 @@ server <- function(input, output) {
   #})
 }
 
-# Run the application 
-#shinyApp(ui = ui, server = server)
+
+#select different columns in rendertable
+#https://stackoverflow.com/questions/48788042/select-different-columns-in-rendertable
