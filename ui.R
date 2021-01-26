@@ -8,7 +8,7 @@ library(wordcloud)
 #library(here)
 
 #load(here::here('apps', 'df', 'df.RData'))
-df <- read.csv("data/Berlin_with_year_position_filtered.csv")
+df <- read.csv("data/berlin.csv")
 #df <- read.csv("D:/Dropbox/R_wissen/berlin_name_year/data/Berlin_with_year.csv")
 
 
@@ -65,11 +65,16 @@ ui <- fluidPage(
                  
     ),
     
+    #check:
+    # https://stackoverflow.com/questions/50800892/change-rendertable-title-in-shiny
     mainPanel(
       tabsetPanel(type = "tabs",
+      
       #tableOutput("result")
-      tabPanel("Frequent names", plotOutput("plot")),
-      tabPanel("Unique names", verbatimTextOutput("result"))
+      #p("Selection of names that were given only once in the year in that particular Kiez")
+      tabPanel("Frequent names", textOutput("text1"), plotOutput("plot")),
+      tabPanel("Unique names", textOutput("text2"),verbatimTextOutput("result"))
+      #tabPanel("t5",h2("normal tab"), p("normal tabs are in pink"), p("active tab is in gold" , style ="font-weight:bold")
       #  plotOutput('plot'),
        # plotOutput('plot2')
       )

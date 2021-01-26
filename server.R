@@ -8,11 +8,10 @@ library(wordcloud)
 #library(here)
 
 #df <- read.csv("data/Berlin_with_year.csv")
-#df <- read.csv("D:/Dropbox/R_wissen/berlin_name_year/data/Berlin_with_year.csv")
 
 
 server <- function(input, output) {
-  df <- read.csv("data/Berlin_with_year_position_filtered.csv")
+  df <- read.csv("data/berlin.csv")
   filtered_kiez <- reactive({
     df %>%
         filter(Kiez == input$kiezId)
@@ -43,17 +42,25 @@ server <- function(input, output) {
   })
 
   output$plot <- renderPlot({
-    p<-wordcloud(words = fully_filtered()$vorname, freq = fully_filtered()$anzahl, colors=brewer.pal(8,"BrBG"),min.freq = 10, max.words=200, random.order=FALSE, rot.per=0.35,scale=c(3.5,0.25))
-    print(p)
+    
+    output$text1 <- renderText({
+      paste("Selection of names that were most frequent in", input$yearId,"in", input$kiezId)
+    })
+    validate(need(!is.null(input$kiezId),
+                  "Please select an option"))
+    p<-wordcloud(words = fully_filtered()$vorname, freq = fully_filtered()$anzahl, colors=brewer.pal(8,"BrBG"),min.freq = 2, max.words=200, random.order=FALSE, rot.per=0.35,scale=c(3.5,0.25))
   })
   
   output$result <-renderPrint({
-    # if (one_filtered()$vorname>20) {
+    # if (len(one_filtered()$vorname)>20) {
     #   (sample(one_filtered()$vorname,20))    
     #   } else {
     #     "No names available"
     #}
-    (sample(one_filtered()$vorname,20)) 
+    output$text2 <- renderText({
+      paste("Selection of names that were unique in", input$yearId,"in", input$kiezId)
+    })
+    (sample(one_filtered()$vorname)) 
   })
   
   # output$plot2 <- renderPlot({
