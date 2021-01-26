@@ -52,14 +52,14 @@ server <- function(input, output) {
     p<-wordcloud(words = fully_filtered()$vorname, freq = fully_filtered()$anzahl, colors=brewer.pal(8,"BrBG"),min.freq = 2, max.words=200, random.order=FALSE, rot.per=0.35,scale=c(3.5,0.25))
   })
   
-  output$result <-renderPrint({
+  output$result <-renderUI({
     validate(
       need(fully_filtered()$vorname, 'No names available for this selection.')
     )
     output$text2 <- renderText({
       paste("Selection of names that were unique in", input$yearId,"in", input$kiezId)
     })
-    (sample(one_filtered()$vorname)) 
+    HTML(as.character(sample(one_filtered()$vorname), sep="<br/>"))
   })
   
   # output$plot2 <- renderPlot({

@@ -1,5 +1,5 @@
-## How do people in Berlin name their children
-### About Wolke, Momoko und Luzifer
+## How people in Berlin name their children
+### About Wolke, Siddhartha, Momoko und Luzifer
 
 View most popular or unique first names in Berlin 2012-2019
 
@@ -9,5 +9,5 @@ Check it out:
 https://hannahbohle.shinyapps.io/berlin_firstnames/
 
 
-
+![screenshot](fig/screenshot_frequent.png)
 

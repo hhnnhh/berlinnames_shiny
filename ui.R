@@ -73,7 +73,7 @@ ui <- fluidPage(
       #tableOutput("result")
       #p("Selection of names that were given only once in the year in that particular Kiez")
       tabPanel("Frequent names", textOutput("text1"), plotOutput("plot")),
-      tabPanel("Unique names", textOutput("text2"),verbatimTextOutput("result"))
+      tabPanel("Unique names", textOutput("text2"),htmlOutput("result"))
       #tabPanel("t5",h2("normal tab"), p("normal tabs are in pink"), p("active tab is in gold" , style ="font-weight:bold")
       #  plotOutput('plot'),
        # plotOutput('plot2')
