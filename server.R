@@ -46,17 +46,16 @@ server <- function(input, output) {
     output$text1 <- renderText({
       paste("Selection of names that were most frequent in", input$yearId,"in", input$kiezId)
     })
-    validate(need(!is.null(input$kiezId),
-                  "Please select an option"))
+    validate(
+      need(fully_filtered()$vorname, 'No names available for this selection.')
+    )
     p<-wordcloud(words = fully_filtered()$vorname, freq = fully_filtered()$anzahl, colors=brewer.pal(8,"BrBG"),min.freq = 2, max.words=200, random.order=FALSE, rot.per=0.35,scale=c(3.5,0.25))
   })
   
   output$result <-renderPrint({
-    # if (len(one_filtered()$vorname)>20) {
-    #   (sample(one_filtered()$vorname,20))    
-    #   } else {
-    #     "No names available"
-    #}
+    validate(
+      need(fully_filtered()$vorname, 'No names available for this selection.')
+    )
     output$text2 <- renderText({
       paste("Selection of names that were unique in", input$yearId,"in", input$kiezId)
     })
